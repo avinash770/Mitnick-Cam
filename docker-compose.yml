@@ -1,0 +1,62 @@
+version: "3"
+
+services:
+    Attacker:
+        image: ubuntu:21.10
+        container_name: attacker-10.9.0.5
+        tty: true
+        cap_add:
+                - ALL
+        privileged: true
+        volumes:
+                - ./volumes:/volumes
+        networks:
+            net-10.9.0.0:
+                ipv4_address: 10.9.0.5
+        
+    Victim:
+        image: ubuntu:21.10
+        container_name: victim-10.9.0.6
+        tty: true
+        cap_add:
+                - ALL
+        privileged: true
+        volumes:
+                - ./volumes:/volumes
+        networks:
+            net-10.9.0.0:
+                ipv4_address: 10.9.0.6
+
+    Server:
+        image: ubuntu:21.10
+        container_name: server-10.9.0.105
+        tty: true
+        cap_add:
+                - ALL
+        privileged: truex
+        volumes:
+                - ./volumes:/volumes
+        networks:
+            net-10.9.0.0:
+                ipv4_address: 10.9.0.105
+
+    HostN:
+        image: ubuntu:21.10
+        container_name: M-10.9.0.106
+        tty: true
+        cap_add:
+                - ALL
+        privileged: true
+        volumes:
+                - ./volumes:/volumes
+        networks:
+            net-10.9.0.0:
+                ipv4_address: 10.9.0.106           
+
+networks:
+    net-10.9.0.0:
+        name: net-10.9.0.0
+        ipam:
+            config:
+                - subnet: 10.9.0.0/24
+
